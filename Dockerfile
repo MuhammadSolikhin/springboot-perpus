@@ -9,7 +9,6 @@ RUN ./gradlew bootJar --no-daemon
 FROM eclipse-temurin:23-jdk
 WORKDIR /app
 COPY --from=build /app/build/libs/*.jar app.jar
-COPY --from=build /app/uploads uploads/
 
 RUN mkdir -p uploads
 

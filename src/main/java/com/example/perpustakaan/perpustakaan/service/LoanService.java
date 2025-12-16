@@ -20,6 +20,7 @@ public class LoanService {
     private final BookRepository bookRepository;
     private final UserRepository userRepository;
 
+    @Transactional(readOnly = true)
     public org.springframework.data.domain.Page<Loan> findAll(String keyword,
             org.springframework.data.domain.Pageable pageable) {
         if (keyword != null && !keyword.isEmpty()) {
@@ -104,6 +105,7 @@ public class LoanService {
         return "Buku berhasil dikembalikan tepat waktu.";
     }
 
+    @Transactional(readOnly = true)
     public org.springframework.data.domain.Page<Loan> getLoansByUser(Long userId,
             org.springframework.data.domain.Pageable pageable) {
         User user = userRepository.findById(userId).orElseThrow();

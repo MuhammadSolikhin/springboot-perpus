@@ -25,8 +25,8 @@
                             <div class="mb-3">
                                 <label for="coverImage" class="form-label">Cover Buku</label>
                                 <div class="mb-2" th:if="${book.coverImage}">
-                                    <img th:src="@{'/uploads/' + ${book.coverImage}}" alt="Cover Buku" height="100"
-                                        class="rounded">
+                                    <img th:src="${book.coverImage.startsWith('http')} ? ${book.coverImage} : @{'/uploads/' + ${book.coverImage}}"
+                                        alt="Cover Buku" height="100" class="rounded">
                                 </div>
                                 <input type="file" class="form-control" id="coverImage" name="image"
                                     accept="image/png, image/jpeg, image/jpg">

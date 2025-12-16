@@ -36,7 +36,8 @@
                     <!-- Cover Image -->
                     <div style="height: 300px; overflow: hidden;"
                         class="bg-light d-flex align-items-center justify-content-center">
-                        <img th:if="${book.coverImage}" th:src="@{'/uploads/' + ${book.coverImage}}"
+                        <img th:if="${book.coverImage}"
+                            th:src="${book.coverImage.startsWith('http')} ? ${book.coverImage} : @{'/uploads/' + ${book.coverImage}}"
                             class="card-img-top h-100 w-100" style="object-fit: cover;" alt="Cover Buku">
                         <i th:unless="${book.coverImage}" class="bi bi-book text-secondary"
                             style="font-size: 5rem;"></i>

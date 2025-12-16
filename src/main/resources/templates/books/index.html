@@ -58,8 +58,8 @@
                                 <td>
                                     <div class="d-flex align-items-center">
                                         <div class="flex-shrink-0 me-3" th:if="${book.coverImage}">
-                                            <img th:src="@{'/uploads/' + ${book.coverImage}}" alt="Cover" width="50"
-                                                class="rounded">
+                                            <img th:src="${book.coverImage.startsWith('http')} ? ${book.coverImage} : @{'/uploads/' + ${book.coverImage}}"
+                                                alt="Cover" width="50" class="rounded">
                                         </div>
                                         <div class="flex-shrink-0 me-3 bg-light d-flex align-items-center justify-content-center rounded"
                                             th:unless="${book.coverImage}" style="width: 50px; height: 75px;">

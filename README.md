@@ -73,4 +73,4 @@ Aplikasi manajemen perpustakaan sederhana berbasis web yang dibangun menggunakan
     ```
 
 ---
-Dibuat dengan ❤️ oleh [Muhammad Solikhin]
+Dibuat dengan ❤️

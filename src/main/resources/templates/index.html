@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout}">
+
+<head>
+    <title>Dashboard</title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <h2>Dashboard</h2>
+        <p class="mb-4">Selamat Datang, <strong sec:authentication="name">User</strong>!</p>
+
+        <div class="row">
+            <!-- Welcome Card -->
+            <div class="col-md-12 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <p class="card-text" sec:authorize="hasRole('ADMIN')">
+                            Anda login sebagai <b>Administrator</b>. Silakan kelola data buku dan peminjaman melalui
+                            menu di samping.
+                        </p>
+                        <p class="card-text" sec:authorize="hasRole('VISITOR')">
+                            Anda login sebagai <b>Anggota</b>. Temukan buku favoritmu dan mulailah membaca!
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Menu -->
+            <div class="col-md-4 mb-3" sec:authorize="hasRole('ADMIN')">
+                <div class="card text-center h-100 border-primary">
+                    <div class="card-body">
+                        <i class="bi bi-book display-4 text-primary"></i>
+                        <h5 class="card-title mt-2">Kelola Buku</h5>
+                        <p class="card-text">Tambah, edit, atau hapus data buku.</p>
+                        <a href="/books" class="btn btn-primary">Buka</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3" sec:authorize="hasRole('ADMIN')">
+                <div class="card text-center h-100 border-success">
+                    <div class="card-body">
+                        <i class="bi bi-list-check display-4 text-success"></i>
+                        <h5 class="card-title mt-2">Peminjaman</h5>
+                        <p class="card-text">Lihat dan proses data peminjaman.</p>
+                        <a href="/loans" class="btn btn-success">Buka</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visitor Menu -->
+            <div class="col-md-4 mb-3" sec:authorize="hasRole('VISITOR')">
+                <div class="card text-center h-100 border-primary">
+                    <div class="card-body">
+                        <i class="bi bi-plus-circle display-4 text-primary"></i>
+                        <h5 class="card-title mt-2">Pinjam Buku</h5>
+                        <p class="card-text">Ajukan peminjaman buku baru.</p>
+                        <a href="/loans/borrow" class="btn btn-primary">Mulai</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3" sec:authorize="hasRole('VISITOR')">
+                <div class="card text-center h-100 border-info">
+                    <div class="card-body">
+                        <i class="bi bi-clock-history display-4 text-info"></i>
+                        <h5 class="card-title mt-2">Riwayat</h5>
+                        <p class="card-text">Lihat status peminjaman Anda.</p>
+                        <a href="/loans" class="btn btn-info text-white">Lihat</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

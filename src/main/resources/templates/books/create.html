@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout}">
+
+<head>
+    <title>Tambah Buku</title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-white">
+                        <h4 class="mb-0">Tambah Buku Baru</h4>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/books}" th:object="${book}" method="post" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="title" class="form-label">Judul Buku</label>
+                                <input type="text" th:field="*{title}" class="form-control" id="title" required
+                                    placeholder="Masukkan judul buku">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="coverImage" class="form-label">Cover Buku</label>
+                                <input type="file" class="form-control" id="coverImage" name="image"
+                                    accept="image/png, image/jpeg, image/jpg">
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="author" class="form-label">Penulis</label>
+                                    <input type="text" th:field="*{author}" class="form-control" id="author" required
+                                        placeholder="Nama penulis">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="publisher" class="form-label">Penerbit</label>
+                                    <input type="text" th:field="*{publisher}" class="form-control" id="publisher"
+                                        placeholder="Nama penerbit">
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="stock" class="form-label">Stok</label>
+                                <input type="number" th:field="*{stock}" class="form-control" id="stock" required
+                                    min="0" placeholder="0">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="synopsis" class="form-label">Sinopsis</label>
+                                <textarea th:field="*{synopsis}" class="form-control" id="synopsis" rows="4"
+                                    placeholder="Deskripsi singkat tentang buku..."></textarea>
+                            </div>
+
+                            <div class="d-flex justify-content-end gap-2">
+                                <a href="/books" class="btn btn-secondary">Batal</a>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bi bi-save"></i> Simpan Buku
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

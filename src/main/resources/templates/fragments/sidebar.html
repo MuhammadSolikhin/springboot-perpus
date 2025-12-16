@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<body>
+    <nav id="sidebar" th:fragment="sidebar">
+        <div class="sidebar-header p-3">
+            <h5>Menu</h5>
+        </div>
+
+        <ul class="list-unstyled components">
+            <!-- Common -->
+            <li th:classappend="${currentUri == '/'} ? 'active'">
+                <a th:href="@{/}"><i class="bi bi-speedometer2"></i> Dashboard</a>
+            </li>
+
+            <!-- ADMIN -->
+            <div sec:authorize="hasRole('ADMIN')">
+                <li class="text-secondary px-3 mt-3"><small>ADMINISTRATION</small></li>
+                <li th:classappend="${#strings.startsWith(currentUri, '/books')} ? 'active'">
+                    <a th:href="@{/books}"><i class="bi bi-journal-text"></i> Data Buku</a>
+                </li>
+                <li th:classappend="${#strings.startsWith(currentUri, '/loans')} ? 'active'">
+                    <a th:href="@{/loans}"><i class="bi bi-list-check"></i> Semua Peminjaman</a>
+                </li>
+                <li
+                    th:classappend="${#strings.startsWith(currentUri, '/users') && currentUri != '/users/login' && currentUri != '/users/register'} ? 'active'">
+                    <a th:href="@{/users}"><i class="bi bi-people"></i> Kelola Pengguna</a>
+                </li>
+            </div>
+
+            <!-- VISITOR -->
+            <div sec:authorize="hasRole('VISITOR')">
+                <li class="text-secondary px-3 mt-3"><small>AREA ANGGOTA</small></li>
+                <li th:classappend="${#strings.startsWith(currentUri, '/books/catalog')} ? 'active'">
+                    <a th:href="@{/books/catalog}"><i class="bi bi-book"></i> Katalog Buku</a>
+                </li>
+                <li th:classappend="${currentUri == '/loans/borrow'} ? 'active'">
+                    <a th:href="@{/loans/borrow}"><i class="bi bi-plus-lg"></i> Pinjam Buku</a>
+                </li>
+                <li th:classappend="${currentUri == '/loans'} ? 'active'">
+                    <a th:href="@{/loans}"><i class="bi bi-clock-history"></i> Riwayat Saya</a>
+                </li>
+            </div>
+        </ul>
+    </nav>
+</body>
+
+</html>

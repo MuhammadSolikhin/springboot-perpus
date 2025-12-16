@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Daftar - Perpustakaan</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .register-card {
+            max-width: 400px;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card register-card shadow-lg border-0">
+        <div class="card-body p-5">
+            <h3 class="text-center mb-4">Daftar Akun</h3>
+
+            <form th:action="@{/users/register}" th:object="${user}" method="post">
+                <div class="mb-3">
+                    <label class="form-label">Nama Lengkap</label>
+                    <input type="text" th:field="*{fullName}" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Username</label>
+                    <input type="text" th:field="*{username}" class="form-control" required />
+                </div>
+                <div class="mb-4">
+                    <label class="form-label">Password</label>
+                    <input type="password" th:field="*{password}" class="form-control" required />
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-success btn-lg">Daftar</button>
+                </div>
+            </form>
+
+            <div class="text-center mt-3">
+                <small>Sudah punya akun? <a th:href="@{/users/login}" class="text-decoration-none">Login
+                        disini</a></small>
+            </div>
+        </div>
+    </div>
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var errorMessage = /*[[${error}]]*/ null;
+        if (errorMessage) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal Daftar',
+                text: errorMessage,
+                confirmButtonColor: '#dc3545'
+            });
+        }
+        /*]]>*/
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout}">
+
+<head>
+    <title>Pinjam Buku</title>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <h2 class="mb-4">Pinjam Buku</h2>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-white">
+                        <h5 class="mb-0">Formulir Peminjaman</h5>
+                    </div>
+                    <div class="card-body">
+                        <div th:if="${error}" class="alert alert-danger" role="alert" th:text="${error}"></div>
+
+                        <form th:action="@{/loans/borrow}" method="post">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold" for="bookIds">Pilih Buku</label>
+                                <select class="form-select" id="bookIds" name="bookIds" multiple="multiple" required>
+                                    <option th:each="book : ${books}" th:value="${book.id}"
+                                        th:text="${book.title} + ' (' + ${book.author} + ')' + (${book.stock > 0} ? '' : ' - STOK HABIS')"
+                                        th:disabled="${book.stock <= 0}">
+                                    </option>
+                                </select>
+                                <div class="form-text">Anda dapat mencari dan memilih banyak buku sekaligus.</div>
+                            </div>
+
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <a href="/loans" class="btn btn-outline-secondary me-md-2">Batal</a>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bi bi-send"></i> Ajukan Peminjaman
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <th:block layout:fragment="scripts">
+        <script>
+            $(document).ready(function () {
+                $('#bookIds').select2({
+                    theme: 'bootstrap-5',
+                    placeholder: '-- Pilih Buku --',
+                    closeOnSelect: false,
+                    allowClear: true
+                });
+            });
+        </script>
+    </th:block>
+</body>
+
+</html>
